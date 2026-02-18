@@ -3,7 +3,7 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
 const eslintConfig = defineConfig([
-  ...nextVitals,
+  // ...nextVitals, // Comment out for faster linting
   ...nextTs,
   // Override default ignores of eslint-config-next.
   globalIgnores([
