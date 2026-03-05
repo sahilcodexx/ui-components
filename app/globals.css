@@ -124,6 +124,21 @@
     @apply bg-background text-foreground;
   }
 }
+
 ::-webkit-scrollbar {
-  display: none;
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }

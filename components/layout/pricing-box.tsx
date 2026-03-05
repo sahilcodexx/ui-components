@@ -21,8 +21,8 @@ const PricingBox = () => {
   ];
 
   return (
-    <Container>
-      <div className="flex flex-col justify-center  md:flex-row  gap-16">
+    <Container className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center  md:flex-row  gap-16">
         <div className="shadow-xl dark:shadow-neutral-900/10 bg-white dark:bg-neutral-800/40 dark:ring-neutral-700/40 dark:ring px-5 py-6 rounded-4xl z-10 overflow-hidden border-3 border-transparent ">
           <div className="flex flex-col items-start gap-2 px- pb-3   ">
             <h2 className="font-bold text-xl">Free</h2>

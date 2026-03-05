@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <div className=" bg-neutral-200  w-full flex flex-col gap-96 justify-between items-center relative overflow-hidden mb-30">
+    <div className=" bg-neutral-200  w-full flex flex-col min-h-screen   justify-between items-center relative overflow-hidden mb-30">
       <div className="h-320 w-full rounded-2xl bg-[radial-gradient(#ec4899,#a855f7,transparent)] blur-3xl opacity-70 absolute -bottom-210 "></div>
       <div className="h-40 w-120 absolute bottom-60 blur-3xl  bg-purple-500  opacity-65  "></div>
       <div className="h-180 w-180  bg-pink-600 opacity-70 rounded-full blur-3xl absolute -bottom-110"></div>

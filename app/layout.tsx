@@ -3,6 +3,7 @@ import { Inter, Nunito_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/layout/navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,7 +41,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
           scriptProps={{ async: true }}
-        >
+          >
+          <Navbar/>
           {children}
         </ThemeProvider>
       </body>
