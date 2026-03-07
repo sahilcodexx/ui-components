@@ -7,8 +7,15 @@ const greetings = [
   { lang: "English", text: "Hello" },
   { lang: "Hindi", text: "हेलो" },
   { lang: "French", text: "Bonjour" },
-  { lang: "Korean", text: "안녕" },
+  { lang: "Dutch", text: "Hallo" },
   { lang: "Japanese", text: "こんにちは" },
+  { lang: "Spanish", text: "Hola" },
+  { lang: "German", text: "Hallo" },
+  { lang: "Arabic", text: "مرحبا" },
+  { lang: "Thai", text: "สวัสดี" },
+  { lang: "Vietnamese", text: "Xin chào" },
+  { lang: "Bengali", text: "হ্যালো" },
+  { lang: "Urdu", text: "ہیلو" },
 ];
 
 const LoaderAnimation = () => {
@@ -17,7 +24,7 @@ const LoaderAnimation = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % greetings.length);
-    }, 200);
+    }, 170);
 
     return () => clearInterval(interval);
   }, []);

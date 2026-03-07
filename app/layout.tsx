@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/layout/navbar";
+import Providers from "@/hooks/transition-provider";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,7 +21,7 @@ const nunito = Nunito_Sans({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
- style: ['normal', 'italic'],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -33,17 +35,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${nunito.variable} ${playfair.variable} antialiased`}>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
+      <body
+        className={`${inter.variable} ${nunito.variable} ${playfair.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
           scriptProps={{ async: true }}
-          >
-          <Navbar/>
-          {children}
+        >
+          <Providers>
+            <Navbar />
+            {children}
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

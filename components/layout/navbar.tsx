@@ -1,11 +1,10 @@
 "use client";
-import Container from "../common/container";
 import { ModeToggle } from "../common/mode-toggle";
-import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { div } from "motion/react-client";
+import { Link } from "next-transition-router";
+
 const MotionSpan = motion.span;
 const MotionDiv = motion.div;
 
