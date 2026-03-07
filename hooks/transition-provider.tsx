@@ -4,15 +4,17 @@ import { TransitionRouter } from "next-transition-router";
 import { motion, useAnimation } from "motion/react";
 import LoaderAnimation from "@/components/ui/loader-animation";
 import { useState, useEffect } from "react";
+import { ReactNode } from "react";
 
-export default function Providers({ children }) {
-  const controls = useAnimation();
+export default function Providers({ children }: { children: ReactNode }) {
+  const loaderControls = useAnimation();
+  const contentControls = useAnimation();
   const [loaderVisible, setLoaderVisible] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  // Initial 3 sec loader on first load
   useEffect(() => {
     const timer = setTimeout(() => {
-      controls.start({ opacity: 0, y: -80, transition: { duration: 0.8 } });
+      loaderControls.start({ opacity: 0, transition: { duration: 0.8 } });
       setLoaderVisible(false);
     }, 1500);
 
@@ -22,37 +24,44 @@ export default function Providers({ children }) {
   return (
     <TransitionRouter
       leave={async (next) => {
-        // Immediately show loader (already mounted)
-        setLoaderVisible(true);
+        if (!isInitialLoad) {
+          await contentControls.start({
+            opacity: 0,
+            x: -50,
+            transition: { duration: 0.4, ease: "easeInOut" },
+          });
+        }
 
-        // Exit animation for 0.8 sec
-        await controls.start({
-          opacity: 0,
-          y: -80,
-          transition: { duration: 0.8, ease: "easeInOut" },
-        });
-
-        next(); // page change after animation
+        setIsInitialLoad(false);
+        next();
       }}
       enter={async (next) => {
-        // Reset loader for next route
-        controls.set({ opacity: 1, y: 0 });
+        if (!isInitialLoad) {
+          await contentControls.start({
+            opacity: [0, 1],
+            x: [50, 0],
+
+            transition: { duration: 0.4, ease: "easeInOut" },
+          });
+        }
+
         setLoaderVisible(false);
         next();
       }}
-      auto
     >
       {loaderVisible && (
         <motion.div
           initial={{ opacity: 1 }}
-          animate={controls}
-          className="fixed inset-0 z-999 bg-white dark:bg-black flex items-center justify-center pointer-events-none"
+          animate={loaderControls}
+          className="fixed inset-0 z-9999 bg-white dark:bg-black flex items-center justify-center pointer-events-none"
         >
           <LoaderAnimation />
         </motion.div>
       )}
 
-      {children}
+      <motion.div animate={contentControls} initial={{ opacity: 1, x: 0 }}>
+        {children}
+      </motion.div>
     </TransitionRouter>
   );
 }
