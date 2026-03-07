@@ -18,7 +18,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center text-white gap-4">
           <h3 className="text-6xl  [font-family:var(--font-playfair)] text-center ">
             Where Ideas
-            <h4 className="italic">Come Alive</h4>
+            <p className="italic">Come Alive</p>
           </h3>
           <p className="max-w-lg text-center leading-none ">
             A new kind of creative platform built to help you move faster, think

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { div } from "motion/react-client";
 const MotionSpan = motion.span;
 const MotionDiv = motion.div;
 
@@ -19,7 +20,7 @@ const Navbar = () => {
   ];
 
   return (
-    <Container className="mt-6  sticky top-6 z-50 w-full ">
+    <div className="mt-6 fixed top-6 z-50 m-auto w-full">
       <div className="flex items-center gap-2 md:gap-5 justify-center dark:bg-black/60 w-fit m-auto  rounded-full px-1.5 py-1.5 border-transparent ring dark:ring-neutral-800/60 ring-neutral-300 bg-white shadow inset-shadow">
         <div className="flex gap-3 md:gap-8 items-center">
           {links.map((link, index) => (
@@ -31,8 +32,7 @@ const Navbar = () => {
                 href={link.href}
               >
                 <AnimatePresence>
-                  {(hoverd === index ||
-                    pathname === link.href) && (
+                  {(hoverd === index || pathname === link.href) && (
                     <MotionDiv
                       layoutId="hoverd"
                       className="absolute  bg-black/9 dark:bg-neutral-800/70 inset-0 rounded-full "
@@ -60,7 +60,7 @@ const Navbar = () => {
           <ModeToggle />
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
