@@ -1,6 +1,7 @@
 import PricingBox from "@/components/layout/pricing-box";
 import HeroSection from "@/components/ui/hero-section";
 import NameLetter from "@/components/ui/letter-ui";
+import LoaderAnimation from "@/components/ui/loader-animation";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <HeroSection />
       <PricingBox />
       <NameLetter />
+      <LoaderAnimation />
     </div>
   );
 }
