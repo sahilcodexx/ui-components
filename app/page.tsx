@@ -1,11 +1,12 @@
-import PricingBox from "@/components/layout/pricing-box";
-import HeroSection from "@/components/ui/hero-section";
-import NameLetter from "@/components/ui/letter-ui";
+"use client";
+
+import { MacDock } from "@/components/ui/mac-dock";
 
 export default function Home() {
   return (
-    <div className="h-screen w-full">
-      <NameLetter />
-    </div>
+    <main className="relative min-h-screen w-full flex items-center justify-center pb-8  text-white">
+      {/* Dock UI Component */}
+      <MacDock />
+    </main>
   );
 }

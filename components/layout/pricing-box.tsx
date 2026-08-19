@@ -17,7 +17,6 @@ const PricingBox = () => {
     { icon: <Lightbulb size={18} />, text: "Smart prompt ideas" },
     { icon: <TrendingUp size={18} />, text: "Advanced dashboard analytics" },
     { icon: <Zap size={18} />, text: "AI-powered script generator" },
-    { icon: <Zap size={18} />, text: "Priority support" },
   ];
 
   return (
