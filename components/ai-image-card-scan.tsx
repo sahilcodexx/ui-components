@@ -3,30 +3,25 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-type AiImageCardProps = {
-  /** Seconds the blinking-grid animation runs before the image pops in. */
+type AiImageCardScanProps = {
   generateDuration?: number;
-  /** Image source to reveal at the end. */
   imageSrc?: string;
-  /** Alt text for the revealed image. */
   imageAlt?: string;
-  /** Label shown at the bottom-left while generating. */
   label?: string;
   className?: string;
 };
 
-export function AiImageCard({
+export function AiImageCardScan({
   generateDuration = 3,
   imageSrc = "/fightclub1.jpeg",
   imageAlt = "AI generated image",
   label = "Generating image",
   className,
-}: AiImageCardProps) {
+}: AiImageCardScanProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [seconds, setSeconds] = useState(0);
   const [done, setDone] = useState(false);
 
-  // Count up timer
   useEffect(() => {
     const start = Date.now();
     const id = setInterval(() => {
@@ -40,7 +35,6 @@ export function AiImageCard({
     return () => clearInterval(id);
   }, [generateDuration]);
 
-  // Blinking grid animation (adapted from Bookmrk BlinkingGrid)
   useEffect(() => {
     if (done) return;
     const canvas = canvasRef.current;
@@ -51,8 +45,8 @@ export function AiImageCard({
     let animationFrameId = 0;
     let width = 0;
     let height = 0;
-    const size = 4; // square size
-    const gap = 2; // gap between squares
+    const size = 4;
+    const gap = 2;
     const step = size + gap;
 
     let cols = 0;
@@ -69,12 +63,11 @@ export function AiImageCard({
         canvas.height = height;
         cols = Math.ceil(width / step);
         rows = Math.ceil(height / step);
-
         offsets = Array.from({ length: cols }, () =>
           Array.from({ length: rows }, () => Math.random() * Math.PI * 2)
         );
         speeds = Array.from({ length: cols }, () =>
-          Array.from({ length: rows }, () => 0.35 + Math.random() * 0.95) // slightly faster blink
+          Array.from({ length: rows }, () => 0.35 + Math.random() * 0.95)
         );
       }
     };
@@ -87,39 +80,34 @@ export function AiImageCard({
       const time = Date.now() * 0.001;
 
       const isDark = document.documentElement.classList.contains("dark");
-      // #818189 in dark mode, soft neutral gray in light mode
       const r = isDark ? 129 : 110;
       const g = isDark ? 129 : 110;
       const b = isDark ? 137 : 120;
 
-      const cx = width / 2;
-      const cy = height / 2;
-      // Wave tuning — larger freq = tighter rings, larger speed = faster expansion
-      const waveFreq = 0.05;
-      const waveSpeed = 1.2;
+      // Horizontal scan line: sweeps left → right, wraps around
+      const scanSpeed = 90; // px/sec
+      const scanPos = ((time * scanSpeed) % (width + 200)) - 100;
+      const bandWidth = 60; // px — how wide the bright band is
 
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
           const cellCx = i * step + step / 2;
           const cellCy = j * step + step / 2;
-          const dx = cellCx - cx;
-          const dy = cellCy - cy;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.abs(cellCx - scanPos);
 
-          // Radial wave expanding outward from the center
-          const radial = Math.sin(dist * waveFreq - time * waveSpeed);
+          // Gaussian-ish falloff from the scan line
+          const scanFalloff = Math.exp(-(dist * dist) / (2 * bandWidth * bandWidth));
 
-          // Per-cell twinkle so the rings aren't perfectly geometric
+          // Per-cell twinkle so the band isn't a perfect stripe
           const offset = offsets[i][j];
           const speed = speeds[i][j];
           const cellWave = Math.sin(time * speed + offset);
+          const cell01 = (cellWave + 1) * 0.5;
 
-          // 70% radial structure, 30% per-cell randomness
-          const combined = (radial * 0.7 + cellWave * 0.3 + 1) * 0.5; // 0..1
+          // 65% scan band, 35% per-cell twinkle
+          const combined = scanFalloff * 0.65 + cell01 * 0.35;
 
-          // Smooth opacity curve with strong contrast — dim troughs, bright crests
-          const opacity = 0.03 + Math.pow(combined, 1.6) * 0.7;
-
+          const opacity = 0.03 + Math.pow(combined, 1.5) * 0.7;
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
           ctx.fillRect(i * step, j * step, size, size);
         }
@@ -142,18 +130,13 @@ export function AiImageCard({
         (className ?? "")
       }
     >
-      {/* Blinking grid background — dissolves as the image materializes */}
       <AnimatePresence>
         {!done && (
           <motion.div
             key="grid"
             className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 1 }}
-            exit={{
-              opacity: 0,
-              scale: 1.08,
-              filter: "blur(14px)",
-            }}
+            exit={{ opacity: 0, scale: 1.08, filter: "blur(14px)" }}
             transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
           >
             <canvas ref={canvasRef} className="w-full h-full" />
@@ -161,7 +144,6 @@ export function AiImageCard({
         )}
       </AnimatePresence>
 
-      {/* Revealed image — clean fade in from blur */}
       <AnimatePresence>
         {done && (
           <motion.div
@@ -170,10 +152,7 @@ export function AiImageCard({
             initial={{ opacity: 0, filter: "blur(20px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, filter: "blur(20px)" }}
-            transition={{
-              duration: 0.9,
-              ease: [0.22, 1, 0.36, 1], // easeOutQuint
-            }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -181,8 +160,6 @@ export function AiImageCard({
               alt={imageAlt}
               className="w-full h-full object-cover"
             />
-
-            {/* Shine sweep across the image as it focuses in */}
             <motion.div
               aria-hidden
               className="absolute inset-0 pointer-events-none"
@@ -196,7 +173,6 @@ export function AiImageCard({
         )}
       </AnimatePresence>
 
-      {/* Subtle flash burst at the moment of reveal */}
       <AnimatePresence>
         {done && (
           <motion.div
@@ -210,7 +186,6 @@ export function AiImageCard({
         )}
       </AnimatePresence>
 
-      {/* Footer: label + timer — smooth fade with text pinned to the very bottom */}
       <div
         className="absolute inset-x-0 bottom-0 h-24 bg-white/40 backdrop-blur-md dark:bg-black/50"
         style={{
