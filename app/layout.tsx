@@ -47,7 +47,7 @@ export default function RootLayout({
           scriptProps={{ async: true }}
         >
           <Providers>
-            <Navbar />
+            {/*<Navbar />*/}
             {children}
           </Providers>
         </ThemeProvider>
