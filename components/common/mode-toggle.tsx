@@ -29,6 +29,7 @@ export function ModeToggle() {
     <Button
       variant="ghost"
       size="icon"
+      aria-label={`Switch to ${currentTheme === "dark" ? "light" : "dark"} theme`}
       className="rounded-full"
       onClick={toggleTheme}
     >
