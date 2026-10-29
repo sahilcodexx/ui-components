@@ -1,9 +1,9 @@
-import Four0Four from "@/components/404ui";
+import Password from "@/components/layout/password";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center p-6 bg-[#F2F2F0] dark:bg-neutral-950">
-      <Four0Four />
+    <main className="flex min-h-screen items-center justify-center bg-[#f8f7f4] px-5 py-16 dark:bg-[#19191b]">
+      <Password />
     </main>
   );
 }
