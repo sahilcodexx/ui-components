@@ -1,0 +1,87 @@
+.scene { position: relative; width: min(800px, 100%); padding-top: 260px; color: #41413f; }
+.foreground { position: absolute; z-index: 5; top: 0; left: 50%; width: min(400px, 100%); transform: translateX(-50%); }
+.toolbar { padding: 10px; border: 1px solid #e2e2e0; border-radius: 23px; background: #ffffffed; box-shadow: 0 2px 3px #00000006, 0 7px 12px #00000009, 0 18px 36px #0000000a; }
+.topRow { display: grid; grid-template-columns: 242fr 376fr; gap: 10px; }
+.palette { position: relative; aspect-ratio: 1; border-radius: 15px; background-color: #f5f5f4; background-image: radial-gradient(#d8d8d5 1.5px, transparent 2px); background-size: 8px 8px; overflow: hidden; }
+.palette svg { display: block; width: 100%; height: 100%; }
+.palette circle { cursor: pointer; }
+.palette circle:focus-visible { outline: none; stroke: #333; stroke-width: 3px; }
+.palette input { position: absolute; bottom: 9px; right: 9px; width: 20px; height: 20px; padding: 0; border: 2px solid white; border-radius: 50%; overflow: hidden; cursor: pointer; opacity: 0; }
+.palette:hover input, .palette:focus-within input { opacity: 1; }
+.tools { display: grid; grid-template-rows: 2fr 1fr; padding: 5px 7px; border-radius: 15px; background: #f5f5f4; }
+.formatGrid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
+.actionRow { display: grid; grid-template-columns: repeat(3, 1fr); }
+.toolbar button { display: flex; align-items: center; justify-content: center; min-width: 0; padding: 0; border: 1px solid transparent; border-radius: 9px; color: inherit; background: transparent; cursor: pointer; }
+.toolbar button svg { width: 20px; height: 20px; stroke-width: 1.9; }
+.toolbar button:hover { background: #eaeae7; }
+.toolbar button:focus-visible, .popover input:focus-visible, .popover button:focus-visible { outline: 2px solid #95958c; outline-offset: 2px; }
+.toolbar button[data-state="on"] { border-color: #e5e5e2; background: linear-gradient(135deg, #fff, #fafafa); box-shadow: 0 1px 2px #00000004; color: #171715; }
+.bottomRow { display: grid; grid-template-columns: 164fr 220fr 220fr; gap: 9px; margin-top: 10px; }
+.sizeControl, .alignment, .toolbar .fontTrigger { display: flex; align-items: center; justify-content: center; min-height: 51px; border-radius: 15px; background: #f5f5f4; }
+.sizeControl { padding: 5px; }
+.sizeControl button { width: 24px; height: 34px; flex-shrink: 0; }
+.sizeControl button svg { width: 17px; height: 17px; }
+.sizeControl button:disabled { opacity: .3; cursor: default; }
+.sizeControl input { width: 30px; min-width: 0; padding: 0; border: 0; outline: none; background: transparent; color: inherit; font-family: Arial, sans-serif; font-size: 17px; text-align: center; appearance: textfield; }
+.sizeControl input::-webkit-inner-spin-button, .sizeControl input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.sizeControl input:focus-visible { border-radius: 4px; outline: 1px solid #aaa; }
+.alignment { padding: 4px; gap: 2px; }
+.alignment button { flex: 1; height: 43px; }
+.toolbar .fontTrigger { gap: 10px; width: 100%; }
+.fontTrigger > span { font-size: 24px; line-height: 1; }
+.toolbar .fontTrigger svg { width: 16px; height: 16px; color: #85857e; }
+.editor a { color: inherit; text-decoration: underline; }
+.status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.popover, .fontMenu { z-index: 50; padding: 8px; border: 1px solid #e2e2de; border-radius: 17px; background: white; color: #41413f; font-family: Arial, sans-serif; box-shadow: 0 8px 25px #00000014; }
+.fontMenu { width: var(--radix-dropdown-menu-trigger-width); min-width: 120px; padding: 5px; border-radius: 12px; }
+.fontItem { display: flex; align-items: center; justify-content: space-between; padding: 7px 9px; border-radius: 7px; font-size: 16px; line-height: 20px; outline: none; cursor: pointer; }
+.fontItem[data-highlighted] { background: #f2f2ef; }
+.popover { width: min(320px, calc(100vw - 32px)); padding: 16px; }
+.popover label { display: block; margin-bottom: 9px; font-size: 13px; }
+.popover form > div { display: flex; gap: 7px; }
+.popover input { min-width: 0; width: 100%; padding: 5px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; background: transparent; }
+.popover button { display: grid; place-items: center; width: 37px; flex-shrink: 0; border: 0; border-radius: 8px; background: #f1f1ee; cursor: pointer; }
+.popover p { margin: 8px 0 0; color: #c64747; font-size: 12px; }
+:global(.dark) .scene { color: #d4d4d0; }
+:global(.dark) .toolbar { background: #242426f5; border-color: #424244; box-shadow: 0 2px 3px #0002, 0 10px 30px #0003; }
+:global(.dark) .tools, :global(.dark) .sizeControl, :global(.dark) .alignment, :global(.dark) .toolbar .fontTrigger { background: #2e2e30; }
+:global(.dark) .sizeControl input { color: #eeeeeb; color-scheme: dark; }
+:global(.dark) .palette { background-color: #2e2e30; background-image: radial-gradient(#49494b 1.5px, transparent 2px); }
+:global(.dark) .toolbar button:hover { background: #3d3d3f; }
+:global(.dark) .toolbar button[data-state="on"] { color: #fafaf5; border-color: #525255; background: linear-gradient(135deg, #444447, #39393c); }
+:global(.dark) .popover, :global(.dark) .fontMenu { background: #29292c; border-color: #444448; color: #e8e8e2; }
+:global(.dark) .fontItem[data-highlighted], :global(.dark) .popover button { background: #3b3b3e; }
+:global(.dark) .popover input { border-color: #505054; }
+
+.selection button { position: absolute; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; pointer-events: auto; cursor: ew-resize; touch-action: none; }
+.selection button::after { content: ""; position: absolute; width: 12px; height: 12px; background: #272725; border-radius: 50%; top: 8px; left: 8px; }
+.editor::selection, .editor *::selection { background: #24242212; }
+:global(.dark) .selection button::after { background: #e5e5df; }
+:global(.dark) .editor::selection, :global(.dark) .editor *::selection { background: #ffffff18; }
+
+.document { width: 100%; margin: 0; }
+.editor { width: 100%; outline: none; color: #747471; font-family: Arial, sans-serif; font-size: 24px; line-height: 1.7; overflow-wrap: anywhere; caret-color: currentColor; }
+.editor p { margin: 0 0 22px; }
+.editor p:last-child { margin-bottom: 0; }
+.editor .quote { margin: 22px 0; font-family: "Toolbar Hand", cursive; font-size: 33px; line-height: 1.4; text-align: center; color: #292927; }
+:global(.dark) .editor { color: #a6a6a1; }
+:global(.dark) .editor .quote { color: #e8e8e2; }
+@media (max-width: 480px) {
+  .scene { padding-top: 245px; }
+  .foreground { width: min(360px, 100%); }
+  .editor { font-size: 20px; line-height: 1.7; }
+  .toolbar { padding: 9px; border-radius: 22px; }
+  .topRow { gap: 8px; }
+  .bottomRow { gap: 7px; margin-top: 8px; }
+  .toolbar button svg { width: 18px; height: 18px; }
+  .sizeControl, .alignment, .toolbar .fontTrigger { min-height: 48px; }
+  .alignment button { height: 40px; }
+  .sizeControl { padding: 3px; }
+  .sizeControl input { width: 25px; font-size: 16px; }
+  .sizeControl button { width: 22px; }
+}
+
+.selection { position: absolute; inset: 0; pointer-events: none; }
+.selection button::before { content: ""; position: absolute; top: 14px; bottom: 14px; left: 13px; width: 2px; background: #272725; }
+.selection .endHandle::after { top: auto; bottom: 8px; }
+:global(.dark) .selection button::before { background: #e5e5df; }
