@@ -142,3 +142,11 @@
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
+
+@font-face {
+  font-family: "Toolbar Hand";
+  src: url("/fonts/toolbar-hand.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
