@@ -44,9 +44,37 @@
 .footer button:hover { color: #242426; }
 .previewNote { text-align: center; margin: 17px 0 0; color: #a5a5ab; font-size: 11px; letter-spacing: .1px; }
 .stage button:focus-visible { outline: 2px solid #4264f5; outline-offset: 4px; border-radius: 4px; }
+:global(.dark) .stage { color: #ededf0; }
+:global(.dark) .shell { background: #101012; border-color: #171719; }
+:global(.dark) .surface { background: #18181b; box-shadow: 0 0 0 1px #303033; }
+:global(.dark) .dropzone { background: #1d1d20; border-color: #343437; }
+:global(.dark) .dropzone[data-dragging="true"] { background: #20243b; border-color: #7790ff; }
+:global(.dark) .uploadCard { background: #2c2c31; border-color: #50505a; box-shadow: 0 2px 4px #0002, 0 5px 12px #0002; }
+:global(.dark) .cards .fileIcon svg { fill: #28282d; stroke: #51515b; }
+:global(.dark) .fileIcon svg { fill: #252529; stroke: #414145; }
+:global(.dark) .fileIcon > span { background: #242d42; color: #8aa9ed; }
+:global(.dark) .fileIcon[data-tone="red"] > span { background: #42232d; color: #e56a86; }
+:global(.dark) .fileIcon[data-tone="purple"] > span { background: #332344; color: #b389ed; }
+:global(.dark) .fileIcon[data-tone="green"] > span { background: #20392d; color: #72c493; }
+:global(.dark) .fileIcon[data-tone="orange"] > span { background: #3f3021; color: #e4b36b; }
+:global(.dark) .browse { color: #8c9dff; }
+:global(.dark) .prompt > span { color: #87878e; }
+:global(.dark) .fileRow { border-color: #2b2b2f; }
+:global(.dark) .fileDetails p { color: #8c8c95; }
+:global(.dark) .fileRow[data-status="error"] .fileDetails p, :global(.dark) .fileRow[data-status="rejected"] .fileDetails p { color: #ee6c89; }
+:global(.dark) .progress { background: #29292f; }
+:global(.dark) .progress > span { background: #e5e5ed; }
+:global(.dark) .fileRow[data-status="error"] .progress > span { background: #e65672; }
+:global(.dark) .rowActions button:hover { background: #29292e; color: #dddde5; }
+:global(.dark) .footer { color: #aaaab3; }
+:global(.dark) .footer button { color: #a4a4ad; }
+:global(.dark) .footer button:hover { color: #eeeef4; }
+:global(.dark) .previewNote { color: #66666e; }
 @media (max-width: 480px) { .dropzone { min-height: 205px; padding: 23px 10px; } .prompt p { font-size: 16px; } .prompt > span { font-size: 11px; } .fileRow { gap: 11px; padding: 17px 5px; } .fileName { font-size: 14px; } .fileDetails p, .footer { font-size: 11px; } .fileIcon { width: 28px; height: 36px; } .rowActions button { width: 25px; } }
 @media (prefers-reduced-motion: reduce) { .dropzone { transition: none; } }
 
 .dropzone:focus-visible { outline: 2px solid #4264f5; outline-offset: 4px; }
 .dropzone:hover { border-color: #b3b6c2; }
 .dropzone[data-dragging="true"]:hover { border-color: #3d62f5; }
+:global(.dark) .dropzone:hover { border-color: #52525a; }
+:global(.dark) .dropzone[data-dragging="true"]:hover { border-color: #7790ff; }
