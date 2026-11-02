@@ -76,5 +76,10 @@
 .dropzone:focus-visible { outline: 2px solid #4264f5; outline-offset: 4px; }
 .dropzone:hover { border-color: #b3b6c2; }
 .dropzone[data-dragging="true"]:hover { border-color: #3d62f5; }
+.showcaseButton { position: fixed; right: 24px; bottom: 24px; z-index: 30; display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 39px; padding: 0 14px; border: 1px solid #dedee3; border-radius: 12px; background: #fff; color: #53535c; font-family: inherit; font-size: 12px; font-weight: 500; cursor: pointer; box-shadow: 0 2px 4px #00000003, 0 5px 16px #00000006; }
+.showcaseButton:hover { background: #f5f5f7; color: #222228; }
 :global(.dark) .dropzone:hover { border-color: #52525a; }
 :global(.dark) .dropzone[data-dragging="true"]:hover { border-color: #7790ff; }
+:global(.dark) .showcaseButton { background: #222226; border-color: #3a3a42; color: #c5c5cf; box-shadow: 0 5px 16px #0002; }
+:global(.dark) .showcaseButton:hover { background: #2d2d33; color: #eeeef5; }
+@media (max-width: 480px) { .showcaseButton { right: 16px; bottom: 16px; } }
