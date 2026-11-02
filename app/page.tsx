@@ -1,4 +1,4 @@
-import TextToolbar from "@/components/text-toolbar";
+import UploadInput from "@/components/upload-input";
 import { ModeToggle } from "@/components/common/mode-toggle";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
       <div className="absolute right-5 top-5">
         <ModeToggle />
       </div>
-      <TextToolbar />
+      <UploadInput />
     </main>
   );
 }
