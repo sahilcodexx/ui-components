@@ -1,13 +1,9 @@
-import UploadInput from "@/components/upload-input";
-import { ModeToggle } from "@/components/common/mode-toggle";
+import DynamicIsland from "@/components/dynamic-island";
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[#fcfcfc] px-5 py-16 font-sans dark:bg-[#161618]">
-      <div className="absolute right-5 top-5">
-        <ModeToggle />
-      </div>
-      <UploadInput />
+    <main className="flex min-h-screen items-center justify-center bg-[#d6d6d8] px-5 py-12 dark:bg-[#161618]">
+      <DynamicIsland />
     </main>
   );
 }
