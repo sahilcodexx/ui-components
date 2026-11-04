@@ -1,0 +1,66 @@
+.figure { width: 100%; max-width: 780px; margin: 0; font-family: var(--font-inter), Arial, sans-serif; color: #272729; }
+.intro { margin: 0 0 31px; }
+.eyebrow { color: #969691; font-family: monospace; font-size: 9px; letter-spacing: 1.7px; }
+.intro h1 { margin: 12px 0 10px; font-size: clamp(28px,4vw,38px); line-height: 1.2; letter-spacing: -1.7px; font-weight: 500; }
+.intro p { margin: 0; color: #93938e; font-size: 13px; line-height: 1.7; }
+.card { --paper: #f8f8f5; --top: #fffffc; --shade0: #d4d4ce; --shade1: #deded8; --shade2: #e8e8e1; --shade3: #efefe9; --hi: #5c5c57; --mid: #96968e; --lo: #b4b4ac; --faint: #d6d6ce; --lit: #272724; --ink: #30302c; position: relative; overflow: hidden; border: 1px solid #deded8; border-radius: 18px; background: #f9f9f6; box-shadow: 0 3px 8px #00000002, 0 16px 45px #00000003; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin: 0 24px; min-height: 61px; border-bottom: 1px solid #e7e7e0; color: #84847d; font-family: monospace; font-size: 9px; letter-spacing: 1px; }
+.header > span { display: flex; align-items: center; gap: 12px; }
+.headerLine { width: 16px; height: 1px; background: #cccac0; }
+.statusDot { width: 5px; height: 5px; border: 1px solid #a4a499; border-radius: 50%; }
+.statusDot[data-running="true"] { background: #85857a; }
+.drawing { display: block; width: 100%; height: auto; outline: none; cursor: ew-resize; touch-action: pan-y; }
+.drawing:focus-visible { outline: 1px solid #99998d; outline-offset: -10px; border-radius: 14px; }
+.drawing :global(path), .drawing :global(circle) { vector-effect: non-scaling-stroke; }
+.card :global(.iso-fill) { fill: var(--paper); stroke: none; }
+.card :global(.iso-top) { fill: var(--top); stroke: none; }
+.card :global(.iso-shade) { stroke: none; }
+.card :global(.iso-shade[data-shade="0"]) { fill: var(--shade0); }
+.card :global(.iso-shade[data-shade="1"]) { fill: var(--shade1); }
+.card :global(.iso-shade[data-shade="2"]) { fill: var(--shade2); }
+.card :global(.iso-shade[data-shade="3"]) { fill: var(--shade3); }
+.card :global(.iso-line) { fill: none; stroke: var(--lo); stroke-width: .65; stroke-linecap: round; stroke-linejoin: round; }
+.card :global(.iso-line[data-tone="hi"]) { stroke: var(--hi); }
+.card :global(.iso-line[data-tone="mid"]) { stroke: var(--mid); }
+.card :global(.iso-line[data-tone="faint"]) { stroke: var(--faint); }
+.card :global(.iso-solid[data-lit] > .iso-fill), .card :global(.iso-solid[data-lit] > .iso-top) { fill: var(--top); }
+.card :global(.iso-solid[data-lit] > .iso-edge) { stroke: var(--lit); }
+.card :global(.iso-halo) { fill: #77776a; opacity: .12; filter: blur(9px); transform: translateY(6px); }
+.card :global(.iso-dots) { fill: var(--mid); }
+.guide { fill: none; stroke: var(--faint); stroke-width: .5; }
+.ink { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; stroke-linecap: round; }
+.drawingFooter { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 24px 24px; color: #99998f; font-size: 10px; }
+.drawingFooter output { color: #7c7c71; white-space: nowrap; font-family: monospace; font-size: 10px; font-variant-numeric: tabular-nums; }
+.controlBar { display: flex; align-items: center; gap: 16px; height: 61px; padding: 0 21px; border-top: 1px solid #e5e5dd; background: #f4f4ef; }
+.controlBar button { display: grid; place-items: center; width: 31px; height: 31px; flex-shrink: 0; padding: 0; border: 1px solid #ddddd4; border-radius: 8px; background: #fcfcf8; color: #66665d; cursor: pointer; }
+.controlBar button:hover { color: #24241f; border-color: #b7b7aa; }
+.controlBar button:focus-visible { outline: 2px solid #99998e; outline-offset: 3px; }
+.controlBar button:disabled { opacity: .35; cursor: default; }
+.controlBar .resetButton { width: 27px; border: 0; background: transparent; }
+.traceLabel { color: #99998d; font-family: monospace; font-size: 9px; letter-spacing: 1.2px; }
+.controlBar input { flex: 1; min-width: 0; height: 18px; margin: 0; accent-color: #6e6e63; cursor: ew-resize; }
+.percent { width: 30px; color: #7e7e72; font-size: 10px; font-family: monospace; font-variant-numeric: tabular-nums; text-align: right; }
+.caption { display: flex; justify-content: space-between; gap: 15px; margin-top: 18px; color: #a0a097; font-size: 10px; line-height: 1.6; }
+.caption > span { display: flex; align-items: center; gap: 7px; }
+.caption i { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #9c9c90; }
+.captionDot { padding: 0 2px; color: #bbbbae; }
+:global(.dark) .figure { color: #e2e2db; }
+:global(.dark) .intro p, :global(.dark) .eyebrow { color: #777771; }
+:global(.dark) .card { --paper: #1c1d1d; --top: #303130; --shade0: #151616; --shade1: #1a1b1b; --shade2: #212222; --shade3: #282928; --hi: #9a9c92; --mid: #62655c; --lo: #464941; --faint: #30332d; --lit: #ecefe2; --ink: #d6dcc9; border-color: #32342f; background: #1a1b1a; box-shadow: 0 3px 8px #0001,0 16px 45px #0001; }
+:global(.dark) .header { color: #797e70; border-color: #2d3029; }
+:global(.dark) .headerLine { background: #45493c; }
+:global(.dark) .statusDot { border-color: #8c947d; }
+:global(.dark) .statusDot[data-running="true"] { background: #b2bea0; }
+:global(.dark) .card :global(.iso-halo) { fill: #050604; opacity: .7; }
+:global(.dark) .drawingFooter { color: #747a6a; }
+:global(.dark) .drawingFooter output { color: #9da58e; }
+:global(.dark) .controlBar { background: #1e201b; border-color: #30342a; }
+:global(.dark) .controlBar button { background: #25281f; border-color: #3c4233; color: #a2ac91; }
+:global(.dark) .controlBar button:hover { border-color: #687459; color: #dde9ca; }
+:global(.dark) .controlBar .resetButton { background: transparent; border-color: transparent; }
+:global(.dark) .controlBar input { accent-color: #9da88a; }
+:global(.dark) .traceLabel, :global(.dark) .percent, :global(.dark) .caption { color: #7a816e; }
+:global(.dark) .caption i { background: #8b9879; }
+@media (max-width: 520px) { .intro { margin-bottom: 23px; } .intro h1 { letter-spacing: -1px; } .intro p { font-size: 12px; max-width: 290px; } .header { margin: 0 16px; min-height: 50px; font-size: 8px; letter-spacing: .4px; } .header > span { gap: 7px; } .drawingFooter { padding: 8px 16px 18px; align-items: flex-start; flex-direction: column; gap: 9px; font-size: 9px; } .controlBar { height: 57px; padding: 0 13px; gap: 11px; } .traceLabel { display: none; } .caption { flex-direction: column; gap: 6px; font-size: 9px; } }
+
+.card.unframed, :global(.dark) .card.unframed { border: 0; border-radius: 0; background: transparent; box-shadow: none; overflow: visible; }
