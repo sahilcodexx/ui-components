@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button, Glass, Slider, TabBar } from "glisse";
-import { BookOpen, Compass, Headphones, House, Moon, Pause, Play, Radio, Sun, Volume2 } from "lucide-react";
+import { AudioLines, BookOpen, Clock3, Compass, Headphones, House, Moon, Pause, Play, Radio, Sun, Volume2 } from "lucide-react";
 
 const tabs = [
   { value: "home", label: "Home", icon: <House size={17} /> },
@@ -34,6 +34,19 @@ export default function GlassPlayground() {
       <button type="button" onClick={() => setDark(value => !value)} aria-label={dark ? "Switch to light theme" : "Switch to dark theme"} className="absolute right-6 top-6 z-10 grid size-11 place-items-center rounded-full border border-white/30 bg-white/20 text-white shadow-lg shadow-slate-900/10 backdrop-blur-xl transition hover:bg-white/30 sm:right-10 sm:top-10">
         {dark ? <Sun size={18} /> : <Moon size={18} />}
       </button>
+
+      <motion.div aria-hidden="true" className="pointer-events-none absolute left-[9%] top-[37%] hidden md:block" animate={{ y: reduced ? 0 : [0, -7, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+        <Glass className="flex items-center gap-3 rounded-2xl px-4 py-3 text-white">
+          <Clock3 size={17} className="text-white/75" />
+          <div><p className="text-sm font-medium">09:41</p><p className="text-[10px] tracking-wide text-white/60">TUESDAY</p></div>
+        </Glass>
+      </motion.div>
+      <motion.div aria-hidden="true" className="pointer-events-none absolute bottom-[34%] right-[9%] hidden md:block" animate={{ y: reduced ? 0 : [0, 7, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
+        <Glass className="flex items-center gap-3 rounded-2xl px-4 py-3 text-white">
+          <AudioLines size={18} className="text-white/80" />
+          <div><p className="text-xs font-medium">Spatial audio</p><p className="mt-0.5 text-[10px] text-white/60">ON · IMMERSIVE</p></div>
+        </Glass>
+      </motion.div>
 
       <motion.section initial={{ opacity: 0, y: reduced ? 0 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.55, ease: "easeOut" }} className="flex w-full max-w-[390px] flex-col items-center gap-5">
         <p className="text-[11px] font-medium uppercase tracking-[.24em] text-white/80 drop-shadow">A little light, held in glass</p>
