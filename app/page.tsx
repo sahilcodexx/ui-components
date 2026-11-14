@@ -1,5 +1,5 @@
-import GlassPlayground from "@/components/glass-playground";
+import DynamicIslandShowcase from "@/components/dynamic-island-showcase";
 
 export default function Home() {
-  return <GlassPlayground />;
+  return <DynamicIslandShowcase />;
 }
